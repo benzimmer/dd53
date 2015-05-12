@@ -13,11 +13,6 @@ get '/update' do
   hostnames = params['hostname'].split(',')
   ip = params['myip']
 
-  # wildcard = params['wildcard']
-  # mx = params['mx']
-  # backmx = params['backmx']
-  # offline = params['offline']
-
   return 'notfqdn' if hostnames.empty?
   return 'numhost' if hostnames.size > 1
 
