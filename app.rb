@@ -1,6 +1,4 @@
-require 'sinatra'
-require 'aws-sdk'
-require 'pry'
+require './environment'
 
 set :username, ENV['USERNAME']
 set :password, ENV['PASSWORD']

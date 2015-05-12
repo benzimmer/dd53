@@ -7,3 +7,5 @@ gem "sinatra"
 gem "aws-sdk"
 
 gem "pry"
+gem "dotenv"
+
