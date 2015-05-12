@@ -15,6 +15,7 @@ get '/update' do
 
   return 'notfqdn' if hostnames.empty?
   return 'numhost' if hostnames.size > 1
+  return 'nochg' if ip.nil?
 
   updater = IpUpdater.new(hostnames.first, ip)
   begin updater.update
