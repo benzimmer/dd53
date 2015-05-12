@@ -44,7 +44,6 @@ class IpUpdater
         change_record
         true
       rescue Exception => e
-        binding.pry
         raise IpChangeError, e
       end
     else
@@ -66,7 +65,7 @@ class IpUpdater
     resp = client.list_resource_record_sets(hosted_zone_id: hosted_zone_id)
     record = resp.resource_record_sets.detect {|rrs| rrs.name == hostname}
 
-    raise HostnameNotFoundError unless record
+    raise HostnameNotFoundError if record.nil?
 
     record.resource_records[0].value != ip
   end
