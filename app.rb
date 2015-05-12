@@ -9,7 +9,7 @@ use Rack::Auth::Basic do |username, password|
   username == settings.username && password == settings.password
 end
 
-get '/update' do
+get '/nic/update' do
   hostnames = params['hostname'].split(',')
   ip = params['myip']
 
