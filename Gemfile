@@ -9,6 +9,8 @@ gem "aws-sdk"
 gem "dotenv"
 
 group :test, :development do
+  gem "shotgun"
+
   gem "rspec"
   gem "rack-test"
   gem "pry"
