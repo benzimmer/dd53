@@ -8,8 +8,8 @@ use Rack::Auth::Basic do |username, password|
 end
 
 get '/nic/update' do
-  hostnames = params['hostname'].split(',')
-  ip = params['myip']
+  hostnames = params.fetch('hostname', '').split(',')
+  ip = params.fetch('myip', nil)
 
   return 'notfqdn' if hostnames.empty?
   return 'numhost' if hostnames.size > 1
