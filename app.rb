@@ -11,20 +11,29 @@ get '/nic/update' do
   hostnames = params.fetch('hostname', '').split(',')
   ip = params.fetch('myip', nil)
 
-  return 'notfqdn' if hostnames.empty?
-  return 'numhost' if hostnames.size > 1
-  return 'nochg' if ip.nil?
+  return Response::NOTFQDN if hostnames.empty?
+  return Response::NUMHOST if hostnames.size > 1
+  return Response::NOCHG if ip.nil?
 
   updater = IpUpdater.new(hostnames.first, ip)
   begin updater.update
-    return 'good'
+    return Response::GOOD
   rescue IpChangeError
-    return 'sth went wrong'
+    return Response::ABUSE
   rescue IpNotChangedError
-    return 'nochg'
+    return Response::NOCHG
   rescue HostnameNotFoundError
-    return 'nohost'
+    return Response::NOHOST
   end
+end
+
+module Response
+  ABUSE = 'abuse'
+  GOOD = 'good'
+  NOCHG = 'nochg'
+  NOHOST = 'nohost'
+  NOTFQDN = 'notfqdn'
+  NUMHOST = 'numhost'
 end
 
 class IpUpdater
