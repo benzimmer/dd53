@@ -18,7 +18,7 @@ get '/update' do
   # backmx = params['backmx']
   # offline = params['offline']
 
-  return 'notfqdn' unless hostname
+  return 'notfqdn' if hostnames.empty?
   return 'numhost' if hostnames.size > 1
 
   updater = IpUpdater.new(hostnames.first, ip)
