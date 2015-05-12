@@ -6,6 +6,10 @@ ruby "2.2.1"
 gem "sinatra"
 gem "aws-sdk"
 
-gem "pry"
 gem "dotenv"
 
+group :test, :development do
+  gem "rspec"
+  gem "rack-test"
+  gem "pry"
+end
