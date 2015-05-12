@@ -12,13 +12,14 @@ end
 
 get '/nic/update' do
   hostnames = params.fetch('hostname', '').split(',')
-  ip = params.fetch('myip', nil)
+  ip = params.fetch('myip', request.env['REMOTE_ADDR'])
 
   return Status.notfqdn if hostnames.empty?
   return Status.numhost if hostnames.size > 1
   return Status.nochg if ip.nil?
 
   updater = Update.new(hostnames.first, ip)
+
   begin updater.update
     return Status.good(ip)
   rescue IpChangeError
