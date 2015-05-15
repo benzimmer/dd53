@@ -56,6 +56,19 @@ RSpec.describe 'IP update', feature: true do
 
   end
 
+  context 'wrong hostname' do
+
+    it 'returns nofqdn' do
+      authorize 'test', 'test'
+
+      get '/nic/update?hostname=wrong.example.com'
+
+      expect(last_response.status).to eq(200)
+      expect(last_response.body).to eq('nohost')
+    end
+
+  end
+
   context 'no IP' do
 
     let(:remote_addr) { '192.168.101.1' }

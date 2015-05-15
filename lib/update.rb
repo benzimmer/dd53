@@ -14,7 +14,7 @@ class Update
   def update
     return false unless can_update?
 
-    if record_changed?
+    if record_needs_update?
       begin
         change_record
         self.status = Status.good(ip)
@@ -43,6 +43,9 @@ class Update
     elsif ip.nil?
       self.status = Status.nochg
       return false
+    elsif record_set.nil?
+      self.status = Status.nohost
+      return false
     end
 
     true
@@ -52,15 +55,8 @@ class Update
     client.change_resource_record_sets(zone_hash)
   end
 
-  def record_changed?
-    resp = client.list_resource_record_sets(hosted_zone_id: hosted_zone_id)
-    record = resp.resource_record_sets.detect {|rrs| rrs.name == hostname}
-
-    if record.nil?
-      self.status = Status.nohost
-    else
-      record.resource_records[0].value != ip
-    end
+  def record_needs_update?
+    record.resource_records[0].value != ip
   end
 
   def zone_hash
@@ -83,9 +79,10 @@ class Update
     }
   end
 
-  def record_sets
-    @record_sets ||= begin
-
+  def record_set
+    @record_set ||= begin
+      resp = client.list_resource_record_sets(hosted_zone_id: hosted_zone_id)
+      record = resp.resource_record_sets.detect {|rrs| rrs.name == hostname}
    end
   end
 
