@@ -11,6 +11,7 @@ RSpec.describe 'IP update', feature: true do
     before do
       allow(Update).to receive(:new) { updater }
       allow(updater).to receive(:update)
+      allow(updater).to receive(:status) { "good #{ip}" }
     end
 
     it 'returns good + IP' do
@@ -44,6 +45,7 @@ RSpec.describe 'IP update', feature: true do
     before do
       allow(Update).to receive(:new) { updater }
       allow(updater).to receive(:update)
+      allow(updater).to receive(:status) { "good #{remote_addr}" }
     end
 
     it 'uses request IP' do

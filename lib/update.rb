@@ -1,22 +1,29 @@
+require './lib/status'
+
 class Update
 
-  attr_reader :ip
+  attr_reader :ip, :hostnames
+  attr_accessor :status
 
-  def initialize(hostname, ip)
-    @hostname = hostname
+  def initialize(hostnames, ip)
+    @hostnames = hostnames
+    @hostname = hostnames.first
     @ip = ip
   end
 
   def update
+    return false unless can_update?
+
     if record_changed?
       begin
         change_record
+        self.status = Status.good(ip)
         true
       rescue Exception => e
-        raise IpChangeError, e
+        self.status = Status.abuse
       end
     else
-      IpNotChangedError
+      self.status = Status.nochg(ip)
     end
   end
 
@@ -26,6 +33,21 @@ class Update
 
   private
 
+  def can_update?
+    if hostnames.empty?
+      self.status = Status.notfqdn
+      return false
+    elsif hostnames.size > 1
+      self.status = Status.numhost
+      return false
+    elsif ip.nil?
+      self.status = Status.nochg
+      return false
+    end
+
+    true
+  end
+
   def change_record
     client.change_resource_record_sets(zone_hash)
   end
@@ -34,9 +56,11 @@ class Update
     resp = client.list_resource_record_sets(hosted_zone_id: hosted_zone_id)
     record = resp.resource_record_sets.detect {|rrs| rrs.name == hostname}
 
-    raise HostnameNotFoundError if record.nil?
-
-    record.resource_records[0].value != ip
+    if record.nil?
+      self.status = Status.nohost
+    else
+      record.resource_records[0].value != ip
+    end
   end
 
   def zone_hash
