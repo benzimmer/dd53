@@ -6,6 +6,10 @@ RSpec.describe 'IP update', feature: true do
   let(:ip) { '127.0.0.1' }
   let(:updater) { double }
 
+  before do
+    allow(Log).to receive(:create)
+  end
+
   context 'all well' do
 
     before do
@@ -21,6 +25,20 @@ RSpec.describe 'IP update', feature: true do
 
       expect(last_response.status).to eq(200)
       expect(last_response.body).to eq("good #{ip}")
+    end
+
+    it 'creates a log entry' do
+      authorize 'test', 'test'
+
+      data = {
+        ip: ip,
+        hostname: hostname,
+        user_agent: nil,
+        status: "good #{ip}",
+      }
+      expect(Log).to receive(:create).with(data: data)
+
+      get "/nic/update?hostname=#{hostname}&myip=#{ip}"
     end
 
   end

@@ -1,0 +1,17 @@
+%h1 Index
+
+%table
+  %tr
+    %th Hostname
+    %th IP
+    %th User Agent
+    %th Status
+    %th Last time changed
+
+  - @logs.each do |log|
+    %tr
+      %td= log.hostname
+      %td= log.ip
+      %td= log.user_agent
+      %td= log.status
+      %td= log.created_at
