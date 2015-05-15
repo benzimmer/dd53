@@ -16,14 +16,16 @@ class Update
 
     if record_needs_update?
       begin
-        change_record
+        update_record!
         self.status = Status.good(ip)
         true
       rescue Exception => e
         self.status = Status.abuse
+        false
       end
     else
       self.status = Status.nochg(ip)
+      false
     end
   end
 
@@ -51,12 +53,12 @@ class Update
     true
   end
 
-  def change_record
+  def update_record!
     client.change_resource_record_sets(zone_hash)
   end
 
   def record_needs_update?
-    record.resource_records[0].value != ip
+    record_set.resource_records[0].value != ip
   end
 
   def zone_hash
@@ -82,7 +84,9 @@ class Update
   def record_set
     @record_set ||= begin
       resp = client.list_resource_record_sets(hosted_zone_id: hosted_zone_id)
-      record = resp.resource_record_sets.detect {|rrs| rrs.name == hostname}
+      record = resp.resource_record_sets.detect do |rrs|
+        rrs.name == hostname
+      end
    end
   end
 
