@@ -2,11 +2,11 @@ class Pagination
 
   attr_reader :page, :limit, :klass, :order
 
-  def initialize(klass, page: page, limit: limit, order: order)
+  def initialize(klass, page: 0, limit: 10, order: 'created_at desc')
     @klass = klass
-    @page = page.to_i || 0
+    @page = page.to_i
     @limit = limit
-    @order = order || 'created_at desc'
+    @order = order
   end
 
   def count
