@@ -58,6 +58,12 @@ RSpec.describe 'IP update', feature: true do
 
   context 'wrong hostname' do
 
+    before do
+      allow(Update).to receive(:new) { updater }
+      allow(updater).to receive(:update)
+      allow(updater).to receive(:status) { "nohost" }
+    end
+
     it 'returns nofqdn' do
       authorize 'test', 'test'
 
