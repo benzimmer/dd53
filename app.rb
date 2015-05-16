@@ -4,6 +4,7 @@ require './lib/status'
 require './lib/update'
 
 require './models/log'
+require './models/pagination'
 
 set :username, ENV['USERNAME']
 set :password, ENV['PASSWORD']
@@ -13,7 +14,8 @@ use Rack::Auth::Basic do |username, password|
 end
 
 get '/' do
-  @logs = Log.all
+  @pagination = Pagination.new(Log, page: params[:page], limit: 10)
+  @logs = @pagination.entries
 
   haml :index
 end
