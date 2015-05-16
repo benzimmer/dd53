@@ -1,17 +1,29 @@
-%h1 Index
+!!!
+%html.no-js{lang: ""}
+  %head
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %title DD53
+    %meta{content: "", name: "description"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    %link{href: "normalize.min.css", rel: "stylesheet"}/
+    %link{href: "main.css", rel: "stylesheet"}/
 
-%table
-  %tr
-    %th Hostname
-    %th IP
-    %th User Agent
-    %th Status
-    %th Last time changed
+  %body
+    %h1 DD53 - Overview
 
-  - @logs.each do |log|
-    %tr
-      %td= log.hostname
-      %td= log.ip
-      %td= log.user_agent
-      %td= log.status
-      %td= log.created_at
+    %table
+      %tr
+        %th.hostname Hostname
+        %th.ip IP
+        %th.user-agent User Agent
+        %th.status Status
+        %th.last-changed Last time changed
+
+      - @logs.each do |log|
+        %tr
+          %td.hostname= log.hostname
+          %td.ip= log.ip
+          %td.user-agent= log.user_agent
+          %td.status= log.status
+          %td.last-changed= log.created_at
