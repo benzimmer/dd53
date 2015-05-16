@@ -37,11 +37,11 @@ Required env variables
     <th>Use</th>
   </tr>
   <tr>
-    <td>USERNAME</td>
+    <td>AUTH_USERNAME</td>
     <td>basic auth username</td>
   </tr>
   <tr>
-    <td>PASSWORD</td>
+    <td>AUTH_PASSWORD</td>
     <td>basic auth password</td>
   </tr>
   <tr>
@@ -65,5 +65,5 @@ Required env variables
 ## Usage
 
 ```bash
-USERNAME=ddns_updater PASSWORD=mysecret AWS_ACCESS_KEY_ID=yourawsaccesskeyid AWS_SECRET_ACCESS_KEY=yourawssecretaccesskey AWS_HOSTED_ZONE_ID=thehostedzoneid AWS_REGION=eu-central-1 bundle exec rackup
+AUTH_USERNAME=ddns_updater AUTH_PASSWORD=mysecret AWS_ACCESS_KEY_ID=yourawsaccesskeyid AWS_SECRET_ACCESS_KEY=yourawssecretaccesskey AWS_HOSTED_ZONE_ID=thehostedzoneid AWS_REGION=eu-central-1 bundle exec rackup
 ```

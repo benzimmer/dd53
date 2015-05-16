@@ -6,8 +6,8 @@ require './lib/update'
 require './models/log'
 require './models/pagination'
 
-set :username, ENV['USERNAME']
-set :password, ENV['PASSWORD']
+set :username, ENV['AUTH_USERNAME']
+set :password, ENV['AUTH_PASSWORD']
 
 use Rack::Auth::Basic do |username, password|
   username == settings.username && password == settings.password
