@@ -7,6 +7,7 @@ gem "rake"
 
 gem "sinatra"
 gem "sinatra-activerecord"
+gem "puma"
 gem "haml"
 gem "pg"
 gem "aws-sdk"
