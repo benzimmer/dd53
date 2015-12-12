@@ -44,11 +44,11 @@ class Route53Client
     end
   end
 
-  private
-
   def fqdn_for(name)
     [name, hosted_zone].join('.')
   end
+
+  private
 
   def build_changes_set(action, name, ip)
     [{

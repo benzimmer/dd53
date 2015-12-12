@@ -2,7 +2,7 @@ require './lib/route53_client'
 
 class Host
 
-  attr_accessor :name, :ip
+  attr_accessor :name, :ip, :updated_at
 
   def self.all
     client.record_sets.map do |rrs|
@@ -24,6 +24,7 @@ class Host
   def initialize(name, ip=nil)
     @name = name
     @ip = ip
+    @updated_at = find_last_update
   end
 
   def update(new_ip)
@@ -50,6 +51,12 @@ class Host
 
   def first_resource_record
     record_set.resource_records[1]
+  end
+
+  def find_last_update
+    if entry = Log.last_entry_for(Host.client.fqdn_for(name))
+      entry.created_at
+    end
   end
 
 end

@@ -15,12 +15,16 @@ use Rack::Auth::Basic do |username, password|
 end
 
 get '/' do
+  @page_title = 'Overview'
+
   @hosts = Host.all
 
   haml :index
 end
 
 get '/updates' do
+  @page_title = 'Updates'
+
   @pagination = Pagination.new(Log, page: params[:page], limit: 10)
   @logs = @pagination.entries
 
@@ -28,6 +32,7 @@ get '/updates' do
 end
 
 get '/hosts/new' do
+  @page_title = 'Create new host'
 
   haml :new_host
 end

@@ -1,14 +1,12 @@
-%h1 DD53 - Overview
-
-%table
-  %tr
-    %th.hostname Hostname
-    %th.ip IP
-
-  - @hosts.each do |host|
-    %tr
-      %td.hostname= host.name
-      %td.ip= host.ip
-
 .container
-  %a.button{href: url("/hosts/new")} Add new host
+  %table.table-hosts
+    %tr
+      %th.hostname Hostname
+      %th.ip IP
+      %th.updated-at Last update
+
+    - @hosts.each do |host|
+      %tr
+        %td.hostname= host.name
+        %td.ip= host.ip
+        %td.updated-at= host.updated_at.strftime('%Y-%m-%d %H:%M:%S')

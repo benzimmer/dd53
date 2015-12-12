@@ -3,11 +3,21 @@
   %head
     %meta{charset: "utf-8"}/
     %meta{content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
-    %title DD53
+    %title= "DD53 - #{@page_title}"
     %meta{content: "", name: "description"}/
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
     %link{href: url("/normalize.min.css"), rel: "stylesheet"}/
     %link{href: url("/main.css"), rel: "stylesheet"}/
 
   %body
+
+    %h1= "DD53 - #{@page_title}"
+
+    .container
+      %nav
+        %a.button{href: url('/')} Overview
+        %a.button{href: url('/updates')} Updates
+        %a.button{href: url('/hosts/new')} + Add new host
+
+
     = yield
