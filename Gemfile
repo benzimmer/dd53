@@ -14,9 +14,10 @@ gem "aws-sdk", "~> 2"
 
 gem "dotenv"
 
+gem "tux"
+
 group :test, :development do
   gem "shotgun"
-  gem "tux"
 
   gem "rspec"
   gem "rack-test"
