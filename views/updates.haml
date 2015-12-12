@@ -17,7 +17,7 @@
 
   .pagination
     - unless @pagination.first_page?
-      %a.prev-link{href: "?page=#{@pagination.prev_page}"}
+      %a.button.prev-link{href: "?page=#{@pagination.prev_page}"}
         Previous page
     .current-page
       = @pagination.page + 1
