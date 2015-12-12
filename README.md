@@ -14,10 +14,10 @@ It currently only implements the following parameters from <https://help.dyn.com
 
 Not currently supported are:
 
-- wildcard = params['wildcard']
-- mx = params['mx']
-- backmx = params['backmx']
-- offline = params['offline']
+- wildcard (deprecated by dyn.com)
+- mx (deprecated by dyn.com)
+- backmx (deprecated by dyn.com)
+- offline (not implemented)
 
 ## Requirements
 
