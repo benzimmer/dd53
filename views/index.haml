@@ -1,41 +1,14 @@
-!!!
-%html.no-js{lang: ""}
-  %head
-    %meta{charset: "utf-8"}/
-    %meta{content: "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
-    %title DD53
-    %meta{content: "", name: "description"}/
-    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
-    %link{href: "normalize.min.css", rel: "stylesheet"}/
-    %link{href: "main.css", rel: "stylesheet"}/
+%h1 DD53 - Overview
 
-  %body
-    %h1 DD53 - Overview
+%table
+  %tr
+    %th.hostname Hostname
+    %th.ip IP
 
-    %table
-      %tr
-        %th.hostname Hostname
-        %th.ip IP
-        %th.user-agent User Agent
-        %th.status Status
-        %th.last-changed Last time changed
+  - @hosts.each do |host|
+    %tr
+      %td.hostname= host.name
+      %td.ip= host.ip
 
-      - @logs.each do |log|
-        %tr
-          %td.hostname= log.hostname
-          %td.ip= log.ip
-          %td.user-agent= log.user_agent
-          %td.status= log.status
-          %td.last-changed= log.created_at
-
-    .pagination
-      - unless @pagination.first_page?
-        %a.prev-link{href: "?page=#{@pagination.prev_page}"}
-          Previous page
-      .current-page
-        = @pagination.page + 1
-        \/
-        = @pagination.max_pages + 1
-      - unless @pagination.last_page?
-        %a.next-link{href: "?page=#{@pagination.next_page}"}
-          Next page
+.container
+  %a.button{href: url("/hosts/new")} Add new host

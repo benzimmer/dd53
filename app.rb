@@ -2,6 +2,7 @@ require './environment'
 
 require './lib/status'
 require './lib/update'
+require './lib/host'
 
 require './models/log'
 require './models/pagination'
@@ -14,10 +15,16 @@ use Rack::Auth::Basic do |username, password|
 end
 
 get '/' do
+  @hosts = Host.all
+
+  haml :index
+end
+
+get '/updates' do
   @pagination = Pagination.new(Log, page: params[:page], limit: 10)
   @logs = @pagination.entries
 
-  haml :index
+  haml :updates
 end
 
 get '/nic/update' do

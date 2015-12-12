@@ -1,0 +1,29 @@
+%h1 DD53 - Overview
+
+%table
+  %tr
+    %th.hostname Hostname
+    %th.ip IP
+    %th.user-agent User Agent
+    %th.status Status
+    %th.last-changed Last time changed
+
+  - @logs.each do |log|
+    %tr
+      %td.hostname= log.hostname
+      %td.ip= log.ip
+      %td.user-agent= log.user_agent
+      %td.status= log.status
+      %td.last-changed= log.created_at
+
+.pagination
+  - unless @pagination.first_page?
+    %a.prev-link{href: "?page=#{@pagination.prev_page}"}
+      Previous page
+  .current-page
+    = @pagination.page + 1
+    \/
+    = @pagination.max_pages + 1
+  - unless @pagination.last_page?
+    %a.button.next-link{href: "?page=#{@pagination.next_page}"}
+      Next page
