@@ -27,6 +27,20 @@ get '/updates' do
   haml :updates
 end
 
+get '/hosts/new' do
+
+  haml :new_host
+end
+
+post '/hosts' do
+  host_params = params[:host].merge({ip: request.env['REMOTE_ADDR']})
+  if  Host.create(host_params)
+    redirect to('/')
+  else
+    haml :new_host
+  end
+end
+
 get '/nic/update' do
   hostnames = params.fetch('hostname', '').split(',')
   ip = params.fetch('myip', request.env['REMOTE_ADDR'])
