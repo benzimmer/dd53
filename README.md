@@ -1,6 +1,7 @@
 # DD53
 
 ![Codeship Status for benzimmer/dd53](https://img.shields.io/codeship/4a874db0-de0e-0132-6a07-2204af7cc628.svg?style=flat)
+[![Dependency Status](https://gemnasium.com/benzimmer/dd53.svg)](https://gemnasium.com/benzimmer/dd53)
 
 ## General
 
@@ -26,8 +27,7 @@ Not currently supported are:
 
 ## Route 53 setup
 
-- Create a new hosted zone and point your domains nameserver records at it as described in the documentation
-- Create a new A record with the desired hostname
+Create a new hosted zone and point your domains nameserver records at it as described in the documentation
 
 ## App configuration parameters
 
