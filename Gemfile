@@ -10,7 +10,7 @@ gem "sinatra-activerecord"
 gem "puma"
 gem "haml"
 gem "pg"
-gem "aws-sdk"
+gem "aws-sdk", "~> 2"
 
 gem "dotenv"
 
