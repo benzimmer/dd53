@@ -6,6 +6,11 @@ RSpec.describe Update, model: true do
 
   let(:hostname) { 'dd.example.com' }
   let(:ip) { '127.0.0.1' }
+  let(:host) { double(name: 'test') }
+
+  before do
+    allow(Host).to receive(:new) { host }
+  end
 
   context 'hostname empty' do
 
@@ -40,12 +45,12 @@ RSpec.describe Update, model: true do
 
   end
 
-  context 'hostname is no configured in Route53' do
+  context 'hostname is not configured in Route53' do
 
     subject { Update.new([hostname], ip) }
 
     it 'returns false and sets correct status' do
-      allow(subject).to receive(:record_set) { nil }
+      allow(host).to receive(:record_set) { nil }
 
       expect(subject.update).to eq(false)
       expect(subject.status).to eq('nohost')
@@ -60,7 +65,8 @@ RSpec.describe Update, model: true do
     let(:record_set) { double(resource_records: [record]) }
 
     it 'returns false and sets correct status' do
-      allow(subject).to receive(:record_set) { record_set }
+      allow(host).to receive(:record_set) { record_set }
+      allow(host).to receive(:update) { false }
 
       expect(subject.update).to eq(false)
       expect(subject.status).to eq("nochg #{ip}")
@@ -75,8 +81,8 @@ RSpec.describe Update, model: true do
     let(:record_set) { double(resource_records: [record]) }
 
     it 'returns false and sets correct status' do
-      allow(subject).to receive(:record_set) { record_set }
-      allow(subject).to receive(:update_record!) { true }
+      allow(host).to receive(:record_set) { record_set }
+      allow(host).to receive(:update) { true }
 
       expect(subject.update).to eq(true)
       expect(subject.status).to eq("good #{ip}")
@@ -91,8 +97,8 @@ RSpec.describe Update, model: true do
     let(:record_set) { double(resource_records: [record]) }
 
     it 'returns false and sets correct status' do
-      allow(subject).to receive(:record_set) { record_set }
-      allow(subject).to receive(:update_record!).and_raise Exception
+      allow(host).to receive(:record_set) { record_set }
+      allow(host).to receive(:update).and_raise Exception
 
       expect(subject.update).to eq(false)
       expect(subject.status).to eq("abuse")
