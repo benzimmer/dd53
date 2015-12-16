@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require './lib/host'
-
 RSpec.describe Host, model: true do
 
   let(:client) { double }
@@ -47,15 +45,17 @@ RSpec.describe Host, model: true do
   describe '.create' do
 
     it 'creates a new resource record' do
+      attributes = { 'name' => hostname, 'ip' =>  '127.0.0.10' }
       expect(client).to receive(:create_record_set).with(hostname, '127.0.0.10')
 
-      Host.create(hostname, '127.0.0.10')
+      Host.create(attributes)
     end
 
     it 'uses 127.0.0.1 as fallback address' do
+      attributes = { 'name' => hostname }
       expect(client).to receive(:create_record_set).with(hostname, '127.0.0.1')
 
-      Host.create(hostname)
+      Host.create(attributes)
     end
 
   end

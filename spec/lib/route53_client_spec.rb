@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require './lib/route53_client'
-
 RSpec.describe Route53Client, model: true do
 
   let(:client) { double }

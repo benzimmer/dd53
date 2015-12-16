@@ -1,5 +1,3 @@
-require './lib/route53_client'
-
 class Host
 
   attr_accessor :name, :ip, :updated_at
@@ -11,7 +9,9 @@ class Host
     end.compact
   end
 
-  def self.create(name, ip='127.0.0.1')
+  def self.create(attributes)
+    name = attributes.fetch('name')
+    ip = attributes.fetch('ip', '127.0.0.1')
     client.create_record_set(name, ip)
   end
 
@@ -24,7 +24,6 @@ class Host
   def initialize(name, ip=nil)
     @name = name
     @ip = ip
-    @updated_at = find_last_update
   end
 
   def update(new_ip)
@@ -41,6 +40,10 @@ class Host
 
   def record_needs_update?
     first_resource_record.value != ip
+  end
+
+  def updated_at
+    @updated_at ||= find_last_update
   end
 
   private

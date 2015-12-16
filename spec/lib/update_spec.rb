@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require './lib/update'
-
 RSpec.describe Update, model: true do
 
   let(:hostname) { 'dd.example.com' }
