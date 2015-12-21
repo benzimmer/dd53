@@ -1,0 +1,11 @@
+%form{action: url('/login'), method: :post}
+  .form-group
+    %label{for: 'email'} Email
+    %input{type: :email, id: 'email', name: 'email', required: true}
+
+  .form-group
+    %label{for: 'password'} Password
+    %input{type: :password, id: 'password', name: 'password', required: true}
+
+  .form-group
+    %button{type: :submit} Login

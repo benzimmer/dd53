@@ -13,11 +13,13 @@
 
     %h1= "DD53 - #{@page_title}"
 
-    .container
-      %nav
-        %a.button{href: url('/')} Overview
-        %a.button{href: url('/updates')} Updates
-        %a.button{href: url('/hosts/new')} + Add new host
+    - unless hide_navigation?
+      .container
+        %nav
+          %a.button{href: url('/')} Overview
+          %a.button{href: url('/updates')} Updates
+          %a.button{href: url('/hosts/new')} + Add new host
+          %a.button{href: url('/logout')} Logout
 
 
     = yield

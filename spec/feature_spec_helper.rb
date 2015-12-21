@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'rack/test'
 
 require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../../config/application', __FILE__)
 
 module RackSpecHelpers
   include Rack::Test::Methods

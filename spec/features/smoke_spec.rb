@@ -5,9 +5,11 @@ RSpec.describe 'IP update', feature: true do
   let(:hostname) { 'dd.example.com' }
   let(:ip) { '127.0.0.1' }
   let(:updater) { double }
+  let(:email) { 'test@dd53.io' }
 
   before do
     allow(Log).to receive(:create)
+    User.create(email: email, password: 'test')
   end
 
   context 'all well' do
@@ -19,7 +21,7 @@ RSpec.describe 'IP update', feature: true do
     end
 
     it 'returns good + IP' do
-      authorize 'test', 'test'
+      authorize email, 'test'
 
       get "/nic/update?hostname=#{hostname}&myip=#{ip}"
 
@@ -28,7 +30,7 @@ RSpec.describe 'IP update', feature: true do
     end
 
     it 'creates a log entry' do
-      authorize 'test', 'test'
+      authorize email, 'test'
 
       data = {
         ip: ip,
@@ -46,7 +48,7 @@ RSpec.describe 'IP update', feature: true do
   context 'no hostname' do
 
     it 'returns nofqdn' do
-      authorize 'test', 'test'
+      authorize email, 'test'
 
       get '/nic/update'
 
@@ -65,7 +67,7 @@ RSpec.describe 'IP update', feature: true do
     end
 
     it 'returns nofqdn' do
-      authorize 'test', 'test'
+      authorize email, 'test'
 
       get '/nic/update?hostname=wrong.example.com'
 
@@ -86,7 +88,7 @@ RSpec.describe 'IP update', feature: true do
     end
 
     it 'uses request IP' do
-      authorize 'test', 'test'
+      authorize email, 'test'
 
       request "/nic/update?hostname=#{hostname}", {'REMOTE_ADDR' => remote_addr}
 

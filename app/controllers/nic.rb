@@ -1,4 +1,5 @@
 get '/nic/update' do
+  basic_auth!
   hostnames = params.fetch('hostname', '').split(',')
   ip = params.fetch('myip', request.env['REMOTE_ADDR'])
 
