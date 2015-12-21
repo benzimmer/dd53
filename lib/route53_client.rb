@@ -45,7 +45,14 @@ class Route53Client
   end
 
   def fqdn_for(name)
-    name + '.'
+    fqdn = if name.include?(hosted_zone)
+      name
+    else
+      [name, hosted_zone].join('.')
+    end
+
+    fqdn += '.' unless fqdn.ends_with?('.')
+    fqdn
   end
 
   private
