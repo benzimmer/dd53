@@ -45,7 +45,7 @@ class Route53Client
   end
 
   def fqdn_for(name)
-    [name, hosted_zone].join('.')
+    name + '.'
   end
 
   private

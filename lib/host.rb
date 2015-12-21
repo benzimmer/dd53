@@ -53,7 +53,7 @@ class Host
   end
 
   def first_resource_record
-    record_set.resource_records[1]
+    record_set.resource_records[0]
   end
 
   def find_last_update

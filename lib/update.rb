@@ -23,7 +23,7 @@ class Update
         self.status = Status.nochg(ip)
         false
       end
-    rescue Exception
+    rescue Exception => e
       self.status = Status.abuse
       false
     end
