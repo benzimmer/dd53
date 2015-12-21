@@ -5,6 +5,7 @@ configure do
   set :session_secret, ENV['SESSION_SECRET'] || 'this is a secret shhhhh'
 
   set :views, File.join(APP_ROOT, "app", "views")
+  set :public_folder, File.join(APP_ROOT, "public")
 end
 
 register do
