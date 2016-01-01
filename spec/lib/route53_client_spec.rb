@@ -5,6 +5,7 @@ RSpec.describe Route53Client, model: true do
   let(:client) { double }
   let(:hostname) { 'test' }
   let(:ip) { '127.0.0.1' }
+  let(:hosted_zone) { 'example.com.' }
 
   subject { Route53Client.instance }
 
@@ -42,6 +43,36 @@ RSpec.describe Route53Client, model: true do
         expect(client).to receive(:list_resource_record_sets) { response }
 
         subject.record_sets
+      end
+
+    end
+
+  end
+
+  describe '#fqdn_for' do
+
+    before do
+      allow(subject).to receive(:hosted_zone) { hosted_zone }
+    end
+
+    context 'pass fqdn' do
+
+      let(:name) { 'home.example.com' }
+
+      it 'it returns the right format' do
+        fqdn = subject.fqdn_for(name)
+        expect(fqdn).to eq('home.example.com.')
+      end
+
+    end
+
+    context 'pass name only' do
+
+      let(:name) { 'home' }
+
+      it 'it returns the right format' do
+        fqdn = subject.fqdn_for(name)
+        expect(fqdn).to eq('home.example.com.')
       end
 
     end
