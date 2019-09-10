@@ -25,7 +25,8 @@ GEM
     concurrent-ruby (1.1.5)
     diff-lcs (1.2.5)
     dotenv (2.1.1)
-    haml (4.0.7)
+    haml (5.1.2)
+      temple (>= 0.8.0)
       tilt
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
@@ -73,6 +74,7 @@ GEM
     sinatra-activerecord (2.0.14)
       activerecord (>= 3.2)
       sinatra (>= 1.0)
+    temple (0.8.1)
     thread_safe (0.3.6)
     tilt (2.0.9)
     tux (0.3.0)
