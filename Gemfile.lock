@@ -19,7 +19,7 @@ GEM
       jmespath (~> 1.0)
     aws-sdk-resources (2.4.2)
       aws-sdk-core (= 2.4.2)
-    bcrypt (3.1.11)
+    bcrypt (3.1.13)
     bond (0.5.1)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
