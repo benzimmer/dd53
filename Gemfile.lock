@@ -24,7 +24,7 @@ GEM
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     diff-lcs (1.2.5)
-    dotenv (2.1.1)
+    dotenv (2.7.5)
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
