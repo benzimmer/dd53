@@ -11,7 +11,7 @@ gem "puma"
 gem "haml"
 gem "pg"
 gem "bcrypt"
-gem "aws-sdk", "~> 2"
+gem "aws-sdk", "~> 3"
 
 gem "dotenv"
 
