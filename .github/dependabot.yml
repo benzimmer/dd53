@@ -1,0 +1,23 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "11:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: aws-sdk
+    versions:
+    - ">= 3.a, < 4"
+  - dependency-name: pry
+    versions:
+    - 0.14.0
+  - dependency-name: activerecord
+    versions:
+    - 5.2.4.5
+  - dependency-name: puma
+    versions:
+    - 5.1.1
+    - 5.2.0
+    - 5.2.1
