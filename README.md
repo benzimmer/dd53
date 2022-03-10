@@ -1,8 +1,5 @@
 # DD53
 
-![Codeship Status for benzimmer/dd53](https://img.shields.io/codeship/4a874db0-de0e-0132-6a07-2204af7cc628.svg?style=flat)
-[![Dependency Status](https://gemnasium.com/benzimmer/dd53.svg)](https://gemnasium.com/benzimmer/dd53)
-
 ## General
 
 DD53 is a [dynamic DNS](https://en.wikipedia.org/wiki/Dynamic_DNS) updater for [AWS Route 53](https://aws.amazon.com/route53/).
